@@ -26,18 +26,12 @@ class OvhManager:
 		else:
 			raise Exception('Please, fill correctly the config file config.cfg.')
 
-
 		if kwargs.get('email'):
 			self.mail = kwargs.get('email')
 		else:
 			raise Exception('Please, provide an email address.')
 
-
-		#aliases = self.api.get('/email/exchange/organization-pa87097-1/service/hosted-pa87097-1/account/hello@anthonypradal.com/alias/')
-		#print aliases
-
 		self._findApiPath()
-		#self.deleteAlias("test2@anthonypradal.com")
 
 	def _findApiPath(self):
 		#  /email/exchange
@@ -82,13 +76,13 @@ class OvhManager:
 		return self.alias
 
 
-
 	def addAlias(self, post_alias):
 		# /email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress}/alias
 		try:
 			result = self.api.post('/email/exchange/{}/service/{}/account/{}/alias'.format(
 				self.organization, self.service, self.mail), alias = "{}@{}".format(post_alias, self.mail.split("@")[1]))
 			self.action[post_alias] = "adding"
+
 		except oexcept.ResourceConflictError:
 			return 409 # Conflict Error
 		return 200
@@ -102,17 +96,9 @@ class OvhManager:
 				self.organization, self.service, self.mail, alias, self.mail.split("@")[1]))
 
 			self.action[alias] = "deleting"
+			
 		except oexcept.ResourceConflictError:
 			return 408 # ConflictError, Pending task or invalid alias
-
-		print json.dumps(result, indent=4)
-
-
-
-
-
-
-
 
 
 

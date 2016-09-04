@@ -26,6 +26,7 @@ class IndexHandler(tornado.web.RequestHandler):
 			if self.get_argument('delete'):
 				API_OVH.deleteAlias(self.get_argument('delete'))
 		except: pass
+
 		# Adding alias
 		try:
 			if self.get_argument('add'):
@@ -47,7 +48,6 @@ if __name__ == '__main__':
 		CK = config.get('OVH_API', 'consumer_key'),
 		email = config.get('Exchange', 'account'))
 
-
 	## Launch Tornado
 	tornado.options.parse_command_line()
 	app = tornado.web.Application(
@@ -60,4 +60,8 @@ if __name__ == '__main__':
 	http_server = tornado.httpserver.HTTPServer(app)
 	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
+
+
+
+
 

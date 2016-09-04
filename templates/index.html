@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ExAlias, Alias manager">
+    <meta name="author" content="Anthony Pradal">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>ExAlias - Alias Manager</title>
+
+	<link rel="stylesheet" href="{{ static_url("css/bootstrap.css") }}">
+	<link rel="stylesheet" href="{{ static_url("css/main.css") }}">
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><b>ExAlias</b></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Manage your alias with <br /> the easiest way.</h1>
+<!-- 				<h3>ExAlias allow you yo create, modify or delete any alias attached to your exchange account. Currently works only with OVH Exchange.</h3><br /> -->
+			</div>
+		</div>
+		<div class="row centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<form class="form-inline" role="form" method="GET">
+				  <div class="form-group">
+				    <input type="text" class="form-control" name="add" placeholder="Enter your new alias. Ex: contact">
+				  </div>
+				  <button type="submit" class="btn btn-warning btn-lg">New Alias</button>
+				</form>					
+			</div>
+			<div class="col-lg-3"></div>
+		</div><!-- /row -->
+	</div>
+
+	<div class="container">
+		<hr>
+		<div class="row centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Alias attached to {{exchange_email}}</h1>
+			</div>
+
+			<div class="col-lg-6 col-lg-offset-3">
+				{% for al in alias %}
+					{% if al[2] == 0 %}
+						<p class="text-success"><strong>
+					{% elif al[2] == 2 %}
+						<p class="text-danger"><strong>
+					{% elif al[2] == 3 %}
+						<p class="text-warning"><strong>
+					{% else %}
+						<p class="text-info"><strong>
+					{% end %}
+					{{al[0]}}</strong>@{{al[1]}}
+					<a href="?delete={{al[0]}}"><button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button></a><br />
+				{% end %}
+					
+			</div>
+		</div>
+		<hr>
+	</div>
+	<div class="container">
+
+		<p class="centered">Created by Anthony anthonypradal.com (c) 2016</p>
+	</div>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{{ static_url("js/bootstrap.min.js") }}"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3 @@
+ovh==0.4.5
+requests==2.11.1
+tornado==4.4.1

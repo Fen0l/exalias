@@ -1,5 +1,7 @@
 # ExAlias
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8c644503c8e54caa9a5cc141923475aa)](https://app.codacy.com/app/Fen0l/exalias?utm_source=github.com&utm_medium=referral&utm_content=Fen0l/exalias&utm_campaign=badger)
+
 A simple awesome alias manager for exchange accounts.
 
 Built with :

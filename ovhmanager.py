@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-import ovh, requests, ssl, json
+import ovh, requests, ssl
 import ovh.exceptions as oexcept
 
 try:
@@ -18,7 +18,7 @@ class OvhManager:
 
 		if kwargs.get('AK') and kwargs.get('AS') and kwargs.get('CK'):
 			self.api = ovh.Client(
-				endpoint='ovh-eu', 
+				endpoint = "ovh-eu", 
 				application_key = kwargs.get('AK'),
 				application_secret = kwargs.get('AS'),
 				consumer_key = kwargs.get('CK')
@@ -79,7 +79,7 @@ class OvhManager:
 	def addAlias(self, post_alias):
 		# /email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress}/alias
 		try:
-			result = self.api.post('/email/exchange/{}/service/{}/account/{}/alias'.format(
+			self.api.post('/email/exchange/{}/service/{}/account/{}/alias'.format(
 				self.organization, self.service, self.mail), alias = "{}@{}".format(post_alias, self.mail.split("@")[1]))
 			self.action[post_alias] = "adding"
 
@@ -92,20 +92,10 @@ class OvhManager:
 		print "Deleting", alias
 		# /email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress}/alias/{alias}
 		try:
-			result = self.api.delete('/email/exchange/{}/service/{}/account/{}/alias/{}@{}'.format(
+			self.api.delete('/email/exchange/{}/service/{}/account/{}/alias/{}@{}'.format(
 				self.organization, self.service, self.mail, alias, self.mail.split("@")[1]))
 
 			self.action[alias] = "deleting"
 			
 		except oexcept.ResourceConflictError:
 			return 408 # ConflictError, Pending task or invalid alias
-
-
-
-
-
-
-
-
-
-	

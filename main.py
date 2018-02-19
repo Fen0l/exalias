@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 import os.path
-import random, time
+import time
 
 import ConfigParser, os
 
@@ -53,8 +53,7 @@ if __name__ == '__main__':
 	app = tornado.web.Application(
 		handlers=[(r'/', IndexHandler)],
 		template_path = os.path.join(os.path.dirname(__file__), "templates"),
-		static_path = os.path.join(os.path.dirname(__file__), "static"),
-		debug = True 
+		static_path = os.path.join(os.path.dirname(__file__), "static")
 	)
 
 	http_server = tornado.httpserver.HTTPServer(app)
